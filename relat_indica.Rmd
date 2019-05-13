@@ -1,0 +1,57 @@
+---
+title: "relat_indica"
+author: "Walter Jr"
+date: "5/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r indica}
+#Verificação dos principais indicadores referentes ao item 1.04
+
+library(tidyverse)
+library(ggplot2)
+
+setwd("/home/lab2")
+dados=read.csv("R/PENSE_AMOSTRA1_ALUNOESCOLA.CSV",header=TRUE, sep=";")
+
+dados1=subset(dados, select = c("aluno","VE01P45","VE01P47","VE01P48","VE01P11","VE01P13","VE01P49"))
+
+dados2=subset(dados, select = c("aluno","VE01P45"))
+print(head(dados2))
+
+#dados que influenciam a alimentação na escola
+
+str(dados1)
+summary(dados1)
+
+
+
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P45))
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P47))
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P48))
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P11))
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P13))
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P49))
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r dados1, echo=FALSE}
+ggplot(dados1) + geom_smooth(aes(x = aluno, y = VE01P49))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
